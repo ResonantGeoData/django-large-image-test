@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/docs/swagger/', schema_view.with_ui('swagger'), name='docs-swagger'),
     path('summary/', image_summary, name='image-summary'),
     path('gallery/', GalleryView.as_view(), name='gallery'),
+    path('', include('django_large_image.urls')),
 ]
 
 if settings.DEBUG:
