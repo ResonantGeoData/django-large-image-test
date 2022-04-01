@@ -6,7 +6,7 @@
 
   <body>
     {% for object in object_list %}
-    <img src="{{ object.blob.url }}" alt="" />
+    <img src="{% url 'image-thumbnail' object.pk %}" alt="thumbnail" style="height: 150px" />
     {% endfor %}
 
     <div class="pagination">
@@ -28,4 +28,3 @@
     </div>
   </body>
 </html>
-
