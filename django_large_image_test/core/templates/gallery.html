@@ -6,7 +6,7 @@
 
   <body>
     {% for object in object_list %}
-    <img src="{% url 'image-thumbnail' object.pk %}" alt="thumbnail" style="height: 150px" />
+    <a href="{% url 'admin:core_image_change' object.pk %}"><img src="{% url 'image-thumbnail' object.pk %}" alt="thumbnail" style="height: 150px" /><a/>
     {% endfor %}
 
     <div class="pagination">
