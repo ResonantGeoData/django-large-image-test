@@ -1,6 +1,6 @@
 from django.http import HttpResponseRedirect
 from django_filters import rest_framework as filters
-from django_large_image.rest import LargeImageViewMixin
+from django_large_image.rest import LargeImageViewSetMixin
 from rest_framework import serializers, status
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
@@ -22,7 +22,7 @@ class ImageSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
 
 
-class ImageViewSet(ReadOnlyModelViewSet, LargeImageViewMixin):
+class ImageViewSet(ReadOnlyModelViewSet, LargeImageViewSetMixin):
     queryset = Image.objects.all()
 
     permission_classes = [IsAuthenticatedOrReadOnly]
