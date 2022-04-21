@@ -42,7 +42,7 @@ but allows developers to run Python code on their native system.
    2. `./manage.py runserver`
 3. Run in a separate terminal:
    1. `source ./dev/export-env.sh`
-   2. `celery --app django_large_image_test.celery worker --loglevel INFO --without-heartbeat`
+   2. `celery --app imaging.celery worker --loglevel INFO --without-heartbeat`
 4. When finished, run `docker-compose stop`
 
 ## Remap Service Ports (optional)

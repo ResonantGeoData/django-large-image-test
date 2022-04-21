@@ -3,7 +3,7 @@ from django.db.models import Count, Q
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from django_large_image_test.core.models import Image
+from imaging.core.models import Image
 
 
 class GalleryView(ListView):
