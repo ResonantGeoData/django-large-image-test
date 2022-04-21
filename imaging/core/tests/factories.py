@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 import factory.django
 
-from django_large_image_test.core.models import Image
+from imaging.core.models import Image
 
 
 class UserFactory(factory.django.DjangoModelFactory):

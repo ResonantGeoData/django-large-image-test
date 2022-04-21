@@ -49,6 +49,9 @@ setup(
         'django-composed-configuration[prod]>=0.20',
         'django-s3-file-field[boto3]',
         'gunicorn',
+        # django-large-image
+        'django-large-image[colormaps]>=0.4.4',
+        'large-image[gdal,pil,ometiff]>=1.14',
     ],
     extras_require={
         'dev': [

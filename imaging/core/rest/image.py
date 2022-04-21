@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django_filters import rest_framework as filters
+from django_large_image.rest import LargeImageFileDetailMixin
 from rest_framework import serializers, status
 from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
@@ -7,9 +8,9 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from django_large_image_test.core.models import Image
-from django_large_image_test.core.rest.user import UserSerializer
-from django_large_image_test.core.tasks import image_compute_checksum
+from imaging.core.models import Image
+from imaging.core.rest.user import UserSerializer
+from imaging.core.tasks import image_compute_checksum
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -21,7 +22,7 @@ class ImageSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
 
 
-class ImageViewSet(ReadOnlyModelViewSet):
+class ImageViewSet(ReadOnlyModelViewSet, LargeImageFileDetailMixin):
     queryset = Image.objects.all()
 
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -31,6 +32,8 @@ class ImageViewSet(ReadOnlyModelViewSet):
     filterset_fields = ['name', 'checksum']
 
     pagination_class = PageNumberPagination
+
+    FILE_FIELD_NAME = 'blob'
 
     @action(detail=True, methods=['get'])
     def download(self, request, pk=None):

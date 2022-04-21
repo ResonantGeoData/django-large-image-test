@@ -2,8 +2,8 @@ from django.contrib import admin, messages
 from django.db.models import QuerySet
 from django.http import HttpRequest
 
-from django_large_image_test.core.models import Image
-from django_large_image_test.core.tasks import image_compute_checksum
+from imaging.core.models import Image
+from imaging.core.tasks import image_compute_checksum
 
 
 @admin.register(Image)

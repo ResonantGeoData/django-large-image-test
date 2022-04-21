@@ -12,9 +12,9 @@ from composed_configuration import (
 )
 
 
-class DjangoLargeImageTestMixin(ConfigMixin):
-    WSGI_APPLICATION = 'django_large_image_test.wsgi.application'
-    ROOT_URLCONF = 'django_large_image_test.urls'
+class ImagingMixin(ConfigMixin):
+    WSGI_APPLICATION = 'imaging.wsgi.application'
+    ROOT_URLCONF = 'imaging.urls'
 
     BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -22,26 +22,27 @@ class DjangoLargeImageTestMixin(ConfigMixin):
     def mutate_configuration(configuration: ComposedConfiguration) -> None:
         # Install local apps first, to ensure any overridden resources are found first
         configuration.INSTALLED_APPS = [
-            'django_large_image_test.core.apps.CoreConfig',
+            'imaging.core.apps.CoreConfig',
         ] + configuration.INSTALLED_APPS
 
         # Install additional apps
         configuration.INSTALLED_APPS += [
             's3_file_field',
+            'django_large_image',
         ]
 
 
-class DevelopmentConfiguration(DjangoLargeImageTestMixin, DevelopmentBaseConfiguration):
+class DevelopmentConfiguration(ImagingMixin, DevelopmentBaseConfiguration):
     pass
 
 
-class TestingConfiguration(DjangoLargeImageTestMixin, TestingBaseConfiguration):
+class TestingConfiguration(ImagingMixin, TestingBaseConfiguration):
     pass
 
 
-class ProductionConfiguration(DjangoLargeImageTestMixin, ProductionBaseConfiguration):
+class ProductionConfiguration(ImagingMixin, ProductionBaseConfiguration):
     pass
 
 
-class HerokuProductionConfiguration(DjangoLargeImageTestMixin, HerokuProductionBaseConfiguration):
+class HerokuProductionConfiguration(ImagingMixin, HerokuProductionBaseConfiguration):
     pass

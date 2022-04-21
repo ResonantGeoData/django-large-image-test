@@ -5,8 +5,8 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 from rest_framework import permissions, routers
 
-from django_large_image_test.core.rest import ImageViewSet
-from django_large_image_test.core.views import GalleryView, image_summary
+from imaging.core.rest import ImageViewSet
+from imaging.core.views import GalleryView, image_summary
 
 router = routers.SimpleRouter()
 router.register(r'images', ImageViewSet)
@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/docs/swagger/', schema_view.with_ui('swagger'), name='docs-swagger'),
     path('summary/', image_summary, name='image-summary'),
     path('gallery/', GalleryView.as_view(), name='gallery'),
+    path('', include('django_large_image.urls')),
 ]
 
 if settings.DEBUG:
