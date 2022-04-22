@@ -37,3 +37,22 @@ services:
       - postgres
       - rabbitmq
       - minio
+
+  tiling:
+    build:
+      context: .
+      dockerfile: ./dev/tiling.Dockerfile
+    command: ["./manage.py", "runserver", "0.0.0.0:8001"]
+    # Log printing via Rich is enhanced by a TTY
+    # tty: true
+    env_file: ./dev/.env.docker-compose
+    environment:
+      - DJANGO_CONFIGURATION=DevelopmentTilingConfiguration
+    volumes:
+      - .:/opt/django-project
+    ports:
+      - 8001:8001
+    depends_on:
+      - postgres
+      - rabbitmq
+      - minio

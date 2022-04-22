@@ -50,8 +50,7 @@ setup(
         'django-s3-file-field[boto3]',
         'gunicorn',
         # django-large-image
-        'django-large-image[colormaps]>=0.4.4',
-        'large-image[gdal,pil,ometiff]>=1.14',
+        'django-large-image[colormaps]>=0.4.5',
     ],
     extras_require={
         'dev': [
@@ -60,6 +59,9 @@ setup(
             'django-s3-file-field[minio]',
             'ipython',
             'tox',
+        ],
+        'tiling': [
+            'large-image[gdal,pil,ometiff]>=1.14',
         ]
     },
 )

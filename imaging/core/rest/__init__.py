@@ -1,3 +1,3 @@
-from .image import ImageViewSet
+from .image import ImageViewSet, TilingViewSet
 
-__all__ = ['ImageViewSet']
+__all__ = ['ImageViewSet', 'TilingViewSet']

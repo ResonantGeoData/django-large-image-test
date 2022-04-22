@@ -32,7 +32,15 @@ class ImagingMixin(ConfigMixin):
         ]
 
 
+class TilingMixin(ImagingMixin):
+    ROOT_URLCONF = 'imaging.urls_tiling'
+
+
 class DevelopmentConfiguration(ImagingMixin, DevelopmentBaseConfiguration):
+    pass
+
+
+class DevelopmentTilingConfiguration(TilingMixin, DevelopmentBaseConfiguration):
     pass
 
 
@@ -40,9 +48,21 @@ class TestingConfiguration(ImagingMixin, TestingBaseConfiguration):
     pass
 
 
+class TestingTilingConfiguration(TilingMixin, TestingBaseConfiguration):
+    pass
+
+
 class ProductionConfiguration(ImagingMixin, ProductionBaseConfiguration):
     pass
 
 
+class ProductionTilingConfiguration(TilingMixin, ProductionBaseConfiguration):
+    pass
+
+
 class HerokuProductionConfiguration(ImagingMixin, HerokuProductionBaseConfiguration):
+    pass
+
+
+class HerokuProductionTilingConfiguration(TilingMixin, HerokuProductionBaseConfiguration):
     pass
