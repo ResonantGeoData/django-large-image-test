@@ -22,7 +22,7 @@ class ImageSerializer(serializers.ModelSerializer):
     owner = UserSerializer()
 
 
-class ImageViewSet(ReadOnlyModelViewSet, LargeImageFileDetailMixin):
+class ImageViewSet(ReadOnlyModelViewSet):
     queryset = Image.objects.all()
 
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -32,8 +32,6 @@ class ImageViewSet(ReadOnlyModelViewSet, LargeImageFileDetailMixin):
     filterset_fields = ['name', 'checksum']
 
     pagination_class = PageNumberPagination
-
-    FILE_FIELD_NAME = 'blob'
 
     @action(detail=True, methods=['get'])
     def download(self, request, pk=None):
@@ -46,3 +44,12 @@ class ImageViewSet(ReadOnlyModelViewSet, LargeImageFileDetailMixin):
         image = self.get_object()
         image_compute_checksum.delay(image.pk)
         return Response('', status=status.HTTP_202_ACCEPTED)
+
+
+class TilingViewSet(ReadOnlyModelViewSet, LargeImageFileDetailMixin):
+    queryset = Image.objects.all()
+
+    permission_classes = [IsAuthenticatedOrReadOnly]
+    serializer_class = ImageSerializer
+
+    FILE_FIELD_NAME = 'blob'
